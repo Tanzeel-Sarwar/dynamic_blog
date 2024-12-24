@@ -3,7 +3,7 @@ import Link from 'next/link'
 import Comments from '@/components/comments'
 
 // The params prop is automatically passed by Next.js for dynamic routes
-export default function Post({ params }: { params: { id: string } }) {
+export default async function Post({ params }: { params: { id: string } }) {
   // Find the post that matches the id from the URL
   const post = posts.find(p => p.id === params.id)
 
