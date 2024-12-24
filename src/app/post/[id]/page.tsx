@@ -9,7 +9,7 @@ type PageProps = {
 };
 
 // Make the component a Server Component by removing 'use client'
-export default function Post({ params, searchParams }: PageProps) {
+export default async function Post({ params, searchParams }: PageProps) {
   const { id } = params;
 
   // Find the post that matches the id from the URL
