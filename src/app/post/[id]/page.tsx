@@ -2,15 +2,29 @@ import { posts } from '@/lib/posts'
 import Link from 'next/link'
 import Comments from '@/components/comments'
 
-// The params prop is automatically passed by Next.js for dynamic routes
-export default async function Post({ params }: { params: { id: string } }) {
+// Define the correct type for params
+type Params = {
+  id: string;
+}
+
+// Define the correct props type for the page component
+type PageProps = {
+  params: Params;
+  searchParams: { [key: string]: string | string[] | undefined };
+}
+
+// Use the correct prop type and make the component async
+export default async function Post({ params, searchParams }: PageProps) {
+  // Since params is no longer a Promise, we can directly use the id
+  const { id } = params;
+
   // Find the post that matches the id from the URL
-  const post = posts.find(p => p.id === params.id)
+  const post = posts.find(p => p.id === id)
 
   if (!post) {
     return <div>Post not found</div>
   }
-
+  
   return (
     <div className="container mx-auto px-4">
       <Link href="/" className="text-blue-600 hover:underline mb-4 inline-block">
