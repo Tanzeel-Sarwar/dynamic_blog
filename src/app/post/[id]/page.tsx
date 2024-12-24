@@ -2,20 +2,14 @@ import { posts } from '@/lib/posts'
 import Link from 'next/link'
 import Comments from '@/components/comments'
 
-// Define the correct type for params
-type Params = {
-  id: string;
-}
-
-// Define the correct props type for the page component
+// Define the correct types for the page props
 type PageProps = {
-  params: Params;
+  params: { id: string };
   searchParams: { [key: string]: string | string[] | undefined };
-}
+};
 
-// Use the correct prop type and make the component async
-export default async function Post({ params, searchParams }: PageProps) {
-  // Since params is no longer a Promise, we can directly use the id
+// Make the component a Server Component by removing 'use client'
+export default function Post({ params, searchParams }: PageProps) {
   const { id } = params;
 
   // Find the post that matches the id from the URL
@@ -24,7 +18,7 @@ export default async function Post({ params, searchParams }: PageProps) {
   if (!post) {
     return <div>Post not found</div>
   }
-  
+
   return (
     <div className="container mx-auto px-4">
       <Link href="/" className="text-blue-600 hover:underline mb-4 inline-block">
