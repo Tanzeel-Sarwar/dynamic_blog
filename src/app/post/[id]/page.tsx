@@ -4,10 +4,9 @@ import Comments from '@/components/comments'
 
 type PageProps = {
   params: { id: any };
-  searchParams: { [key: string]: string | string[] | undefined };
 };
 
-export default async function Post({ params, searchParams }: PageProps) {
+export default async function Post({ params }: PageProps) {
 
   const id  =  (params.id as unknown) as string;
 
