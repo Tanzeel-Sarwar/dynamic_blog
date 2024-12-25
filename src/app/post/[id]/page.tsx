@@ -2,15 +2,19 @@ import { posts } from '@/lib/posts'
 import Link from 'next/link'
 import Comments from '@/components/comments'
 
-type PageProps = {
-  params: { id: any };
-};
+// type PageProps = {
+//   params: { id: any };                  
+// 
+//};
+ type TParams = Promise<{id: string[]}>;
 
-export default async function Post({ params }: PageProps) {
+export default async function Post({ params }: {params: TParams}) {
+  const id = (await params).id as unknown as string
 
-  const id  =  (params.id as unknown) as string;
+  const post = await posts.find((p) => p.id === id)
+  // const id  =  (params.id as unknown) as string;
 
-  const post = await posts.find(p => p.id === id);
+  // const post = await posts.find(p => p.id === id);
 
   if (!post) {
     return <div>Post not found</div>;
