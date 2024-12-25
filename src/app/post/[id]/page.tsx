@@ -9,14 +9,15 @@ type PageProps = {
 };
 
 // Make the component a Server Component by removing 'use client'
-export default async function  Post({ params, searchParams }: PageProps) {
+export default async function Post({ params, searchParams }: PageProps) {
+  // Await the params to resolve the promise
   const { id } = await params;
-  
+
   // Find the post that matches the id from the URL
-  const post = await posts.find(p => p.id === id)
+  const post = await posts.find(p => p.id === id);
 
   if (!post) {
-    return <div>Post not found</div>
+    return <div>Post not found</div>;
   }
 
   return (
@@ -31,6 +32,5 @@ export default async function  Post({ params, searchParams }: PageProps) {
       </div>
       <Comments postId={post.id} />
     </div>
-  )
+  );
 }
-
