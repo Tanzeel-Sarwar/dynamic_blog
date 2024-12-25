@@ -4,14 +4,13 @@ import Comments from '@/components/comments'
 
 // Define the correct types for the page props
 type PageProps = {
-  params: { id: string };
+  params: { id: string };  // `params` is a resolved object, not a Promise
   searchParams: { [key: string]: string | string[] | undefined };
 };
 
 // Make the component a Server Component by removing 'use client'
 export default async function Post({ params, searchParams }: PageProps) {
-  // Await the params to resolve the promise
-  const { id } = await params;
+  const { id } = params;  // params is already a resolved object
 
   // Find the post that matches the id from the URL
   const post = await posts.find(p => p.id === id);
